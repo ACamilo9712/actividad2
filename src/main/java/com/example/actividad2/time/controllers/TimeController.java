@@ -1,18 +1,29 @@
 package com.example.actividad2.time.controllers;
 
+import com.example.actividad2.services.TimeService;
 import com.example.actividad2.time.domain.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1/times")
+@RequiredArgsConstructor
 public class TimeController {
 
+    private final TimeService timeService;
 
-    @GetMapping("/info")
+    @PostMapping
+    public DayTime insertOne(@RequestBody DayTime timeBody){
+        return timeService.inertOne(timeBody.getHour(),timeBody.getMinute(),timeBody.getSecond());
+    }
+
+    @GetMapping
+    public ArrayList<DayTime> findAll(){
+        return timeService.findAll();
+    }
+
+    /*@GetMapping("/info")
     public HourPerDay getInfoHour() {
         LocalDateTime now = LocalDateTime.now();
         Hour hour = Hour.of(now.getHour());
@@ -24,6 +35,8 @@ public class TimeController {
        Long segundos = TimeUnit.fromHour(TimeUnit.SECONDS,now.toLocalTime());
        Long milisegundos = TimeUnit.fromHour(TimeUnit.MILLISECONDS,now.toLocalTime());
         return HourPerDay.from(hour, minute, second, minuto.intValue());
+    }*/
 
-    }
+
+
 }

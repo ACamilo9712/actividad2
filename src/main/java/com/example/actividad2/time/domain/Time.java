@@ -1,7 +1,7 @@
 package com.example.actividad2.time.domain;
 
 import com.example.actividad2.common.Precondicions;
-import lombok.Data;
+
 import lombok.Value;
 
 import java.util.regex.Pattern;
